@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+<section>
+	<nav class="pagination" role="navigation">
+		{{#if prev}}
+	        <a class="newer-posts" href="{{page_url prev}}"><i class="fa fa-chevron-left"></i></a>
+	    {{/if}}
+	    <span id="pagination-list" class="page-number"></span>
+	    {{#if next}}
+	    	<a class="older-posts" href="{{page_url next}}"><i class="fa fa-chevron-right"></i></a>
+	    {{/if}}
+	</nav>
+</section>
+<div id="page-total" style="display:none;">{{pages}}</div>
+<div id="page-current" style="display:none;">{{page}}</div>
+<script type="text/javascript">
+	var pageTotal = document.getElementById('page-total').innerHTML;
+	var pageCurrent = document.getElementById('page-current').innerHTML;
+	var nav = document.getElementById('pagination-list');
+
+	for (i = 1; i <= pageTotal; i++) {
+	// If you are on the current page, bold the nubmer and do not link
+		if (i == pageCurrent) {
+		    nav.innerHTML += "<strong>" + i + "</strong>";
+		} 
+		else {
+		    nav.innerHTML += "<a href=/page/" + i + ">" + i + "</a>";
+		}
+		if (i != pageTotal) {
+			nav.innerHTML +=  "&nbsp;"
+		}
+	}
+</script>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+<nav class="site-nav">
+    <div class="site-nav-left">
+        {{^is "home"}}
+            {{#if @site.logo}}
+                <a class="site-nav-logo" href="{{@site.url}}"><img src="{{@site.logo}}" alt="{{@site.title}}" /></a>
+            {{else}}
+                <a class="site-nav-logo" href="{{@site.url}}">{{@site.title}}</a>
+            {{/if}}
+        {{/is}}
+        {{#if @site.navigation}}
+            {{navigation}}
+        {{/if}}
+    </div>
+    <div class="site-nav-right">
+        <button class="material-icons search-icon search-start show_search_button" id="search">search</button>
+        {{#if @labs.subscribers}}
+            <a class="subscribe-button" href="#subscribe">Subscribe</a>
+        {{else}}
+            <a class="rss-button" href="https://feedly.com/i/subscription/feed/{{@site.url}}/rss/" title="RSS" target="_blank" rel="noopener">{{> "icons/rss"}}</a>
+        {{/if}}
+    </div>
+</nav>
+<script type="text/javascript">
+    $("#search").click(function () {
+        window.location.href = window.location.origin+"/search";
+    });
+</script>
+</html>

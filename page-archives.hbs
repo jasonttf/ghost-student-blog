@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+{{!< default}}
+
+<header class="site-header outer">
+    <div class="inner">
+        {{> "site-nav"}}
+    </div>
+</header>
+
+<div class="site-main outer">
+	<main id="site-main" class="site-main outer">
+		<div class="inner">
+			<article class="post-full post page no-image">
+				<header class="post-full-header">
+					<h1 class="post-full-title">Archive</h1>
+				</header>
+				<section class="post-full-content">
+					<div id='archivesBox' class='archives-box outer'></div>
+				</section>
+			</article>
+		</div>
+	</main>
+</div>
+
+<script src="//cdn.bootcss.com/moment.js/2.14.1/moment.min.js"></script>
+<script type = "text/javascript"> 
+	jQuery(document).ready(function() {
+		//获取所有文章数据，按照发表时间排列
+		$.get({url:'/ghost/api/v2/content/posts/?key='+_ApiKey+'&limit=all'}).done(function(data) {
+			console.log(data);
+			var posts = data.posts;
+			var count = posts.length;
+
+	        var html = "<div class='archives'></div>"
+	        $(html).appendTo('#archivesBox');
+			$('.site-description').html('<div class="archives-posts-total">Total ' + count + ' Articles</div>')
+			for (var i = 0; i < count; i++) {
+				//调用comentjs对时间戳进行操作
+				var time = moment(posts[i].published_at);
+				var year = time.get('y');
+				var month = time.get('M')+1;
+				var date = time.get('D');
+				if( date<10 ) date = "0"+date;
+				var title = posts[i].title;
+				var url = posts[i].url;
+				//var excerpt = posts[i].excerpt;
+				//首篇文章与其余文章分步操作
+				if (i > 0) {
+					var pre_month = moment(posts[i - 1].published_at).get('month')+1;
+					//如果当前文章的发表月份与前篇文章发表月份相同，则在该月份ul下插入该文章
+					if (month == pre_month) { 
+						//var html = "<li><div><time>"+date+"日</time><a href='"+url+"'>"+title+"</a><div class='archives-excerpt'>"+excerpt+"<div></div></li>";
+						var html = "<li><time>"+date+" </time><a href='"+url+"'>"+title+"</a></li>";
+						$(html).appendTo(".archives .list-"+year+"-"+month);
+					}
+					//当月份不同时，插入新的月份
+					else{
+						//var html = "<div class='item'>"+"<h3><i class='fa fa-calendar fa-fw' aria-hidden='true'></i> "+year+"-"+month+"</h3><ul class='archives-list list-"+year+"-"+month+"'><li><time>"+date+"</time><a href='"+url+"'>"+title+"</a><div class='archives-excerpt'>"+excerpt+"<div></li></ul></div>";
+						var html = "<div class='item'><h3><i class='fa fa-calendar fa-fw' aria-hidden='true'></i> "+year+"-"+month+"</h3><ul class='archives-list list-"+year+"-"+month+"'><li><time>"+date+" </time><a href='"+url+"'>"+title+"</a></li></ul></div>";
+						$(html).appendTo('.archives');
+					}
+				}else{
+					
+					//var html = "<div class='item'><h3><i class='fa fa-calendar fa-fw' aria-hidden='true'></i> "+year+"-"+month+"</h3><ul class='archives-list list-"+year+"-"+month+"'><li><time>"+date+" </time><a href='"+url+"'>"+title+"</a><div class='archives-excerpt'>"+excerpt+"<div></li></ul></div>";
+					var html = "<div class='item'><h3><i class='fa fa-calendar fa-fw' aria-hidden='true'></i> "+year+"-"+month+"</h3><ul class='archives-list list-"+year+"-"+month+"'><li><time>"+date+" </time><a href='"+url+"'>"+title+"</a></li></ul></div>";
+					$(html).appendTo('.archives');
+				}
+			}
+		}).fail(function(err) {
+			console.log(err);
+		});
+}); 
+</script>
+</html>

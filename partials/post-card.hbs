@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+<article class="post-card {{post_class}}">
+    {{#if feature_image}}
+    <a class="post-card-image-link" href="{{url}}">
+        {{!-- This is a responsive image, it loads different sizes depending on device
+        https://medium.freecodecamp.org/a-guide-to-responsive-images-with-ready-to-use-templates-c400bd65c433 --}}
+        <img class="post-card-image"
+            srcset="{{img_url feature_image size='s'}} 300w,
+                    {{img_url feature_image size='m'}} 600w,
+                    {{img_url feature_image size='l'}} 1000w,
+                    {{img_url feature_image size='xl'}} 2000w"
+            sizes="(max-width: 1000px) 400px, 700px"
+            src="{{img_url feature_image size='m'}}"
+            alt="{{title}}"
+        />
+    </a>
+    {{/if}}
+
+    <div class="post-card-content">
+
+        <a class="post-card-content-link" href="{{url}}">
+
+            <header class="post-card-header">
+                <h2 class="post-card-title">{{title}}</h2>
+            </header>
+
+            <section class="post-card-excerpt">
+                <p>{{excerpt words="33"}}</p>
+            </section>
+
+        </a>   
+        <footer class="post-card-meta" style="padding-bottom: .5vw;">
+            <ul class="author-list">
+            {{#foreach authors}}
+                <li class="author-list-item">
+
+                    <div class="author-name-tooltip">
+                        {{name}}
+                    </div>
+
+                    {{#if profile_image}}
+                        <a href="{{url}}" class="static-avatar">
+                            <img class="author-profile-image" src="{{img_url profile_image size='xs'}}" alt="{{name}}" />
+                        </a>
+                    {{else}}
+                        <a href="{{url}}" class="static-avatar author-profile-image">{{> "icons/avatar"}}</a>
+                    {{/if}}
+                </li>
+            {{/foreach}}
+            </ul>
+            <span><i class="fa fa-calendar fa-fw"></i>{{date published_at format="YYYY-MM-DD"}}</span>
+        </footer>
+        {{#if tags}}
+        <hr style="margin: 0;">
+        <footer class="post-card-meta tags_list">
+            {{#foreach tags limit="3"}}
+                <div class="tags_list_item"><a href="{{url}}" class="postcard_tags" title="{{name}}" class="tag tag-{{id}} {{slug}}">{{name}}</a></div>
+            {{/foreach}}
+        </footer>
+        {{/if}}
+
+    </div>{{!--/.post-card-content--}}
+
+</article>
+</html>

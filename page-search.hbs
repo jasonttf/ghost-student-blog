@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+{{!< default}}
+<header class="site-header outer">
+    <div class="inner">
+        {{> "site-nav"}}
+    </div>
+</header>
+<div class="site-main outer">
+	<main id="site-main" class="site-main outer">
+		<div class="inner">
+			<article class="post-full post page no-image">
+				<header class="post-full-header">
+					<h1 class="post-full-title">Search</h1>
+				</header>
+				<section class="post-full-content">
+					<div class="search_form" id="search_form">
+						<input type="text" id="search-field" placeholder="Search here" class="search_field"/>
+						<button class="remove_field">&#10005;</button>
+					</div>
+					<section id="results"></section>
+					
+				</section>
+			</article>
+		</div>
+	</main>
+</div>
+<script src="{{asset 'js/search.js'}}"></script>
+<script type="text/javascript">
+	$(".remove_field").click(function () {
+		$("#search-field").val("");
+		$("#results").empty();
+	})
+	var remove_field_width=$(".remove_field").width();
+	var search_form_with=$(".search_form").width();
+	$(".search_field").width(search_form_with-remove_field_width-40);
+	// console.log(remove_field_width);
+	// console.log(search_form_with);
+	// console.log($(".search_field").width());
+	$(window).on("resize", function () {
+		remove_field_width=$(".remove_field").width();
+		search_form_with=$(".search_form").width();
+		$(".search_field").width(search_form_with-remove_field_width-40);
+		// console.log(remove_field_width);
+		// console.log(search_form_with);
+		// console.log($(".search_field").width());
+	});
+
+
+</script>
+</html>

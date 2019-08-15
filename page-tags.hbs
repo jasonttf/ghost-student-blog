@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+{{!< default}}
+{{!-- The tag above means: insert everything in this file
+into the {body} of the default.hbs template --}}
+
+<header class="site-header outer">
+    <div class="inner">
+        {{> "site-nav"}}
+    </div>
+</header>
+
+<div class="site-main outer">
+    <main id="site-main" class="site-main outer">
+        <div class="inner">
+            <article class="post-full post page no-image">
+                <header class="post-full-header">
+                    <h1 class="post-full-title">Tags</h1>
+                </header>
+                <section class="post-full-content">
+                    <div class="tags-box">
+                        <ul class="tags-list"></ul>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </main>
+</div>
+
+<script>
+    window.onload= function(){
+        $.ajax({url:'/ghost/api/v2/content/tags/?key='+_ApiKey+'&include=count.posts',success:function(re){
+            //console.log(re);
+            re.tags.forEach(function(item){
+                $('.tags-list').append($('<li class="tags-item"><a href="' + item.url + '"' + 'title="' + item.name + '">' + item.name + '<span>  '+'[ '+item.count.posts+' ]'+'</span></a></li>'));
+            })
+        }},)
+    }
+</script>
+</html>

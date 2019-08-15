@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+{{!< default}}
+<header class="site-header outer">
+    <div class="inner">
+        {{> "site-nav"}}
+    </div>
+</header>
+<div class="site-main outer">
+	<main id="site-main" class="site-main outer">
+		<div class="inner">
+			<article class="post-full post page no-image">
+				<header class="post-full-header">
+					<h1 class="post-full-title">Contact Me</h1>
+				</header>
+				<section class="post-full-content">
+					<div align="left" style="width: 100%">
+						<p style="text-align: center;">If you want to contact me directly, you can use the form below to drop me an email. I will do my best to get back to you as soon as possible!</p>
+						<form action="//formspree.io/850418797@qq.com" method="POST" id="contact_form">
+							<input type="text" name="_gotcha" style="display:none"/>
+
+							<input type="text" name="name" placeholder="Your name"/> 
+							<input type="text" name="_replyto" placeholder="Your Email"/> 
+							<input type="text" name="_subject" placeholder="Subject" /> 
+							<textarea class="message_area" name="message" cols="40" rows="5" placeholder="Type your message here..."></textarea>
+
+							<button class="form_submit_button">Submit</button>
+						</form>
+					</div>
+				</section>
+			</article>
+		</div>
+	</main>
+</div>
+</html>

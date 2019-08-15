@@ -1,0 +1,8 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+<ul class="nav">
+    {{#foreach navigation}}
+    <li class="nav_list nav-{{slug}}{{#if current}} nav-current{{/if}}"><a href="{{url absolute='true'}}">{{label}}</a></li>
+    {{/foreach}}
+</ul>
+</html>

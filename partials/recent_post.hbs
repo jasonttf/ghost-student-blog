@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+<div class="footer_recent_post">
+	<h3 class="footer_recent_post_title">Recent Posts</h3>
+	{{#get "posts" limit="5" as |recents|}}
+	<ul>
+		{{#foreach recents}}
+			<li><a class="footer_recent_post_text" href="{{url}}">{{title}}</a></li>
+		{{/foreach}}
+	</ul>
+	{{/get}}
+</div>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{@site.lang}}">
+<div class="footer_container">
+	<footer class="footer">
+		<div id="row" class="row">
+			<div class="column">
+				{{> footer-nav}}
+			</div>
+			<div class="line vl"></div>
+			<div class="column">
+				{{> recent_post}}
+			</div>
+			{{#if @labs.subscribers}}
+				<div class="line vl"></div>
+				<div class="column">
+					{{> footer-subscribe}}
+				</div>
+			{{/if}}
+		</div>
+		<hr style="width: 90%; margin: 0 auto;">
+	</footer>
+</div>
+<script type="text/javascript">
+	windowSize();
+	if (windowWidth <= 695) {
+		$("#row").attr("class", "");
+		$(".vl").append("<hr>");
+		$(".vl").attr("class", "line");
+	}
+	$(window).on("resize", function () {
+		windowSize();
+		//console.log(windowWidth);
+		if (windowWidth <= 695) {
+			$("#row").attr("class", "");
+			$(".vl").append("<hr>");
+			$(".vl").attr("class", "line");
+		}
+		else {
+			$("#row").attr("class", "row");
+			$(".line").attr("class", "line vl");
+			$(".vl").empty();
+		}
+	});
+</script>
+</html>
